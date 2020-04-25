@@ -7,7 +7,15 @@ class SmileRating extends HTMLElement {
 
   set value(v) {
     this._value = parseInt(v);
+    if (this._value < -2 || this._value > 2)
+      console.warn("Value must be between -2 and 2");
+    if (this._value > 2) this._value = parseInt(2);
+    if (this._value < -2) this._value = parseInt(-2);
+
     this._updateClasses();
+
+    // New event listener
+    this.dispatchEvent(new CustomEvent("change"));
   }
 
   // Private
@@ -28,7 +36,16 @@ class SmileRating extends HTMLElement {
     <style>
     li { 
       display: inline-block;
+      font-size: 40px;
+      user-select: none;
       opacity: 0.4;
+      transition: transform 0.2s;
+    }
+
+    li:hover {
+      cursor: pointer;
+      opacity: 0.6;
+      transform: scale(1.2);
     }
 
     li.active {

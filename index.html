@@ -5,8 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rating Web Component</title>
   </head>
+  <style>
+    .results {
+      font-family: Helvetica;
+      padding-left: 40px;
+    }
+  </style>
   <body>
     <smile-rating></smile-rating>
+    <div class="results"></div>
+
     <script src="SmileRating.js"></script>
+
+    <script>
+      const rating = document.querySelector("smile-rating");
+      const results = document.querySelector(".results");
+
+      rating.addEventListener("change", () => {
+        results.innerHTML = `Chosen rating is ${rating.value}`;
+      });
+    </script>
   </body>
 </html>
